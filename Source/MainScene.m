@@ -10,48 +10,34 @@ CLLocationManager * locationManager;
 CCLabelTTF *lat;
 }
 
-- (void)viewDidLoad
+- (void)onEnter
 {
-//    [super viewDidLoad
-    // Do any additional setup after loading the view, typically from a nib.
-    locationManager = [[CLLocationManager alloc] init];
-    geocoder = [[CLGeocoder alloc]init];
-}
+    [super onEnter];
+    NSLog(@"sup");
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    [self.locationManager startUpdatingLocation];}
 
 -(void)sendLocation
 {
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [locationManager startUpdatingLocation];
+    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+    NSLog(theLocation);
+    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
+    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];        NSLog(theLocation);
+  
+
     NSLog(@"working");
 
     
 }
 
-#pragma mark CCLocationManagerDelegate Methods
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+-(void)motionEnded: (UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    NSLog(@"didFailWithError: %@", error);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    NSLog(@"didUpdateToLocation: %@", newLocation);
-    CLLocation *currentLocation = newLocation;
-    NSLog(@"calling");
-    if (currentLocation != nil) {
-        NSString *longitudeLabel = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        NSString* latitudeLabel = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
-        NSLog(longitudeLabel);
-        NSLog(latitudeLabel);
+    if (motion==UIEventSubtypeMotionShake)
+    {
+        [self sendLocation];
     }
-    
 }
-
-
 @end
 
