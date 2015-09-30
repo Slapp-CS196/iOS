@@ -1,9 +1,8 @@
 #import "MainScene.h"
-
 @implementation MainScene
 {
 CCButton *locator;
-CLLocationManager * locationManager;
+CLLocationManager * _locationManager;
     CLGeocoder*geocoder;
     CLPlacemark*placemark;
     CCLabelTTF *longitude;
@@ -12,12 +11,15 @@ CCLabelTTF *lat;
 
 - (void)onEnter
 {
+    
     [super onEnter];
-    NSLog(@"sup");
+        NSLog(@"sup");
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
-    [self.locationManager startUpdatingLocation];}
+    [self.locationManager startUpdatingLocation];
+}
+
 
 -(void)sendLocation
 {
@@ -31,11 +33,22 @@ CCLabelTTF *lat;
 
     
 }
-
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake )
+    {
+        NSLog(@"shooken");
+    }
+}
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
 -(void)motionEnded: (UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion==UIEventSubtypeMotionShake)
     {
+        NSLog(@"shook");
         [self sendLocation];
     }
 }
