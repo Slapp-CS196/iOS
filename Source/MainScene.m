@@ -11,6 +11,7 @@ CLLocationManager * _locationManager;
 CCLabelTTF *lat;
     CCButton *slapper;
     BOOL *slapped;
+    double initialAccel;
 }
 -(id)init
 {
@@ -40,12 +41,13 @@ CCLabelTTF *lat;
     [_motionManager startAccelerometerUpdates];
 }
 - (void)update:(CCTime)delta {
-    if (slapped)
+        if (slapped)
     {
-    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
-    CMAcceleration acceleration = accelerometerData.acceleration;
-        NSLog(@"%f",acceleration.z);
-        if(acceleration.z>1.0)
+        CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+        CMAcceleration acceleration = accelerometerData.acceleration;
+        double currentAccel = acceleration.z;
+            NSLog(@"%f",acceleration.z);
+        if(fabs(currentAccel-initialAccel)>1.0)
         {
             NSLog(@"slapp activated");
             //generate timestamp or something
@@ -64,6 +66,9 @@ CCLabelTTF *lat;
     longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
     lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
     slapped=true;
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+   initialAccel=acceleration.z;
 
     NSLog(@"working");
 
