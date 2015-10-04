@@ -25,7 +25,14 @@ CCLabelTTF *lat;
 {
     
     [super onEnter];
-        NSLog(@"sup");
+    slapped=false;
+    NSDate *currentDate = [[NSDate alloc] init];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [dateFormatter setTimeZone:timeZone];
+    NSString *localDateString = [dateFormatter stringFromDate:currentDate];
+        NSLog(localDateString);
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
@@ -33,11 +40,17 @@ CCLabelTTF *lat;
     [_motionManager startAccelerometerUpdates];
 }
 - (void)update:(CCTime)delta {
-    if (slapped=true)
+    if (slapped)
     {
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
         NSLog(@"%f",acceleration.z);
+        if(acceleration.z>1.0)
+        {
+            NSLog(@"slapp activated");
+            //generate timestamp or something
+            
+        }
         slapped=false;
     }
     
