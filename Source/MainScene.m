@@ -38,10 +38,10 @@ CCLabelTTF *lat;
     //locationManager initilization
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate=self;
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];}
-        self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter=kCLDistanceFilterNone;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager startUpdatingLocation];
     [_motionManager startAccelerometerUpdates];
 }
