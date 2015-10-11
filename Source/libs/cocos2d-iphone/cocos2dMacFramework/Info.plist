@@ -20,7 +20,9 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>NSPrincipalClass</key>
-	<string></string>
+	<key>NSLocationWhenInUsageDescription</key>
+	<string>Location Service is Required </string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location Service is Required to Proceed</string>
 </dict>
 </plist>
