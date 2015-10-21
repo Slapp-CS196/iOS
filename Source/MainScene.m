@@ -13,6 +13,10 @@ CCLabelTTF *lat;
     BOOL *slapped;
     double initialAccel;
 }
+-(void)captureSlap
+{
+    NSLog(@"slapping");
+}
 -(id)init
 {
     if (self = [super init])
@@ -85,11 +89,12 @@ CCLabelTTF *lat;
 - (void)update:(CCTime)delta {
         if (slapped)
     {
+        
         CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         double currentAccel = acceleration.z;
             NSLog(@"%f",acceleration.z);
-        if(fabs(currentAccel-initialAccel)>1.0)
+        if(fabs(currentAccel-initialAccel)>0.5)
         {
             NSLog(@"slapp activated");
             //generate timestamp or something
@@ -116,16 +121,37 @@ CCLabelTTF *lat;
 
     
 }
--(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-    if (motion == UIEventSubtypeMotionShake )
-    {
-        NSLog(@"shook");
-    }
-}
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
+float kUpdateFrequency= 100.0;
+float kFilteringFactor=0.1;
+float accelZ;
+int spikeZCount = 0;
+
+////[[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / kUpdateFrequency];
+////[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+////
+////- (void) accelerometer: (UIAccelerometer *) accelerometer didAccelerate: (UIAcceleration *) acceleration
+////{
+////    accelZ = acceleration.z - ( (acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+////    
+////    if (accelZ > 0.0f)
+////    {
+////        if (spikeZCount > 9)
+////        {
+////            //  NSLog(@"SPIKE!");
+////            [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+////            
+////            [NSLog(@"BUMPED")];
+////        }
+////        else
+////        {
+////            spikeZCount++;
+////            //  NSLog(@"spikeZCount %i",spikeZCount);
+////        }
+////    }
+////    else
+////    {
+////        // NSLog(@"spikeZCount Reset");
+////        spikeZCount = 0;
+////    }
 @end
 
