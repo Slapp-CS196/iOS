@@ -52,7 +52,7 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need Location</string>
-	<key>NSLocationWhenInUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need Location</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>

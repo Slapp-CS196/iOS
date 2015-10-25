@@ -16,6 +16,11 @@ CCLabelTTF *lat;
 -(void)captureSlap
 {
     NSLog(@"slapping");
+    [self schedule:@selector(determineIfSlaped) interval:0.4];
+}
+-(void)determineIfSlaped
+{
+    NSLog(@"test");
 }
 -(id)init
 {
