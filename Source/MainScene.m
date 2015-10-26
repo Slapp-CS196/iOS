@@ -12,15 +12,31 @@ CCLabelTTF *lat;
     CCButton *slapper;
     BOOL *slapped;
     double initialAccel;
+    NSTimer *myTimer;
 }
 -(void)captureSlap
 {
     NSLog(@"slapping");
-    [self schedule:@selector(determineIfSlaped) interval:0.4];
-}
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    initialAccel=acceleration.z;
+
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(determineIfSlaped) userInfo:nil repeats:YES];}
+
 -(void)determineIfSlaped
 {
     NSLog(@"test");
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    double currentAccel = acceleration.z;
+    NSLog(@"%f",acceleration.z);
+    if(fabs(currentAccel-initialAccel)>1)
+    {
+        NSLog(@"slapp activated");
+        [myTimer invalidate];
+    }
+
+    
 }
 -(id)init
 {
@@ -118,10 +134,7 @@ CCLabelTTF *lat;
     longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
     lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
     slapped=true;
-    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
-    CMAcceleration acceleration = accelerometerData.acceleration;
-   initialAccel=acceleration.z;
-
+    
     NSLog(@"working");
 
     
