@@ -131,32 +131,6 @@ float kFilteringFactor=0.1;
 float accelZ;
 int spikeZCount = 0;
 
-////[[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / kUpdateFrequency];
-////[[UIAccelerometer sharedAccelerometer] setDelegate:self];
-////
-////- (void) accelerometer: (UIAccelerometer *) accelerometer didAccelerate: (UIAcceleration *) acceleration
-////{
-////    accelZ = acceleration.z - ( (acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
-////    
-////    if (accelZ > 0.0f)
-////    {
-////        if (spikeZCount > 9)
-////        {
-////            //  NSLog(@"SPIKE!");
-////            [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-////            
-////            [NSLog(@"BUMPED")];
-////        }
-////        else
-////        {
-////            spikeZCount++;
-////            //  NSLog(@"spikeZCount %i",spikeZCount);
-////        }
-////    }
-////    else
-////    {
-////        // NSLog(@"spikeZCount Reset");
-////        spikeZCount = 0;
-////    }
+
 @end
 
