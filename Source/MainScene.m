@@ -13,9 +13,17 @@ CCLabelTTF *lat;
     BOOL *slapped;
     double initialAccel;
     NSTimer *myTimer;
+    NSTimer *yourTimer;
+    CCLabelTTF *status;
+
 }
 -(void)captureSlap
 {
+    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+    NSLog(theLocation);
+    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
+    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
+
     NSLog(@"slapping");
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
@@ -33,10 +41,30 @@ CCLabelTTF *lat;
     if(fabs(currentAccel-initialAccel)>1)
     {
         NSLog(@"slapp activated");
+        
+        yourTimer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(determineBackSlap) userInfo:nil repeats:YES];
         [myTimer invalidate];
     }
 
+        
+    }
+
     
+
+-(void)determineBackSlap
+{
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration2 = accelerometerData.acceleration;
+    double currentAccel2 = acceleration2.z;
+    if((currentAccel2-initialAccel)>0)
+    {
+        NSLog(@"Actually slapped");
+        status.string=[NSString stringWithFormat:@"Slap Detected!"];
+        [yourTimer invalidate];
+        
+
+    
+    }
 }
 -(id)init
 {
@@ -129,10 +157,10 @@ CCLabelTTF *lat;
 
 -(void)sendLocation
 {
-    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
-    NSLog(theLocation);
-    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
-    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
+//    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+//    NSLog(theLocation);
+//    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
+//    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
     slapped=true;
     
     NSLog(@"working");
