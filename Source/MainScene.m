@@ -12,15 +12,59 @@ CCLabelTTF *lat;
     CCButton *slapper;
     BOOL *slapped;
     double initialAccel;
+    NSTimer *myTimer;
+    NSTimer *yourTimer;
+    CCLabelTTF *status;
+
 }
 -(void)captureSlap
 {
+    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+    NSLog(theLocation);
+    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
+    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
+
     NSLog(@"slapping");
-    [self schedule:@selector(determineIfSlaped) interval:0.4];
-}
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    initialAccel=acceleration.z;
+
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(determineIfSlaped) userInfo:nil repeats:YES];}
+
 -(void)determineIfSlaped
 {
     NSLog(@"test");
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    double currentAccel = acceleration.z;
+    NSLog(@"%f",acceleration.z);
+    if(fabs(currentAccel-initialAccel)>1)
+    {
+        NSLog(@"slapp activated");
+        
+        yourTimer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(determineBackSlap) userInfo:nil repeats:YES];
+        [myTimer invalidate];
+    }
+
+        
+    }
+
+    
+
+-(void)determineBackSlap
+{
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration2 = accelerometerData.acceleration;
+    double currentAccel2 = acceleration2.z;
+    if((currentAccel2-initialAccel)>0)
+    {
+        NSLog(@"Actually slapped");
+        status.string=[NSString stringWithFormat:@"Slap Detected!"];
+        [yourTimer invalidate];
+        
+
+    
+    }
 }
 -(id)init
 {
@@ -113,14 +157,17 @@ CCLabelTTF *lat;
 
 -(void)sendLocation
 {
-    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
-    NSLog(theLocation);
-    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
-    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
+//    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+//    NSLog(theLocation);
+//    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
+//    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
     slapped=true;
+<<<<<<< HEAD
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
    initialAccel=acceleration.z;
+=======
+>>>>>>> ecc8965f81b88e6fc203dc3c06d71dca829209c8
     
     NSLog(@"working");
     
@@ -152,32 +199,6 @@ float kFilteringFactor=0.1;
 float accelZ;
 int spikeZCount = 0;
 
-////[[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / kUpdateFrequency];
-////[[UIAccelerometer sharedAccelerometer] setDelegate:self];
-////
-////- (void) accelerometer: (UIAccelerometer *) accelerometer didAccelerate: (UIAcceleration *) acceleration
-////{
-////    accelZ = acceleration.z - ( (acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
-////    
-////    if (accelZ > 0.0f)
-////    {
-////        if (spikeZCount > 9)
-////        {
-////            //  NSLog(@"SPIKE!");
-////            [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-////            
-////            [NSLog(@"BUMPED")];
-////        }
-////        else
-////        {
-////            spikeZCount++;
-////            //  NSLog(@"spikeZCount %i",spikeZCount);
-////        }
-////    }
-////    else
-////    {
-////        // NSLog(@"spikeZCount Reset");
-////        spikeZCount = 0;
-////    }
+
 @end
 
