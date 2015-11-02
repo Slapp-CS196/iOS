@@ -121,11 +121,32 @@ CCLabelTTF *lat;
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
    initialAccel=acceleration.z;
-
+    
     NSLog(@"working");
+    
+//    
+//    //brian and zohair's code gl adam\
+//    //http://api.slapp.xyz/api/new?user_id=testuser02&latitude=1.7&longitude=1.1&radius=50&time=65127891
+//
+  //  NSString *urlString  = @"http://api.slapp.xyz/api/new?user_id=testuserios&latitude=" + lat + "&longitude=1.1&radius=50&time=65127891";
+  NSURL *url = [NSURL URLWithString:@"http://api.slapp.xyz/api/new?user_id=testuser02&latitude=1.7&longitude=1.1&radius=50&time=65127891"];
+   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+  [request setHTTPMethod:@"GET"];
+ //  [request setHTTPBody:lat];
+   //[request setHTTPBody:longitude];
+    //
+    NSURLResponse *response;
+    NSError *err;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    NSString *strData = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding ];
+    NSLog(@"%@",strData);
+    NSLog(@"done");
+//    NSLog(@"responseData: %@", responseData);
+//    
 
     
 }
+
 float kUpdateFrequency= 100.0;
 float kFilteringFactor=0.1;
 float accelZ;
