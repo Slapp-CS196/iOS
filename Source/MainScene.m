@@ -19,6 +19,7 @@ CCLabelTTF *lat;
 }
 -(void)captureSlap
 {
+    status.string=[NSString stringWithFormat:@""];
     NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
     NSLog(theLocation);
     longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
@@ -162,7 +163,6 @@ CCLabelTTF *lat;
 //    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
 //    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
     slapped=true;
-    
     NSLog(@"working");
 
     
