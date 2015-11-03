@@ -63,7 +63,17 @@ CCLabelTTF *lat;
         NSLog(@"Actually slapped");
         status.string=[NSString stringWithFormat:@"Slap Detected!"];
         [yourTimer invalidate];
-        
+        NSString *url = [NSString stringWithFormat:@"https://api.slapp.xyz/api/new?user_id=briansbutthole&latitude=%@&longitude=%@&radius=20&time=%@",lat.string,longitude.string,localDateString];
+        NSLog(url);
+        NSURL *newURL = [NSURL URLWithString:url];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:newURL];
+        [request setHTTPMethod:@"GET"];
+               NSURLResponse *response;
+        NSError *err;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+        NSString *strData = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding ];
+        NSLog(@"%@",strData);
+        NSLog(@"done");
 
     
     }
