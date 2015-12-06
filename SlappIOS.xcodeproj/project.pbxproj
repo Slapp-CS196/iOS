@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		5B121030197484FA004C1E1D /* SlappIOSActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* SlappIOSActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
+		664BDD151C13B0040015846D /* NewUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 664BDD141C13B0040015846D /* NewUser.m */; };
+		666647EE1C14F4C100A3DD3B /* SlapPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 666647ED1C14F4C100A3DD3B /* SlapPage.m */; };
 		666E8C841BAF60E900E7ADFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666E8C831BAF60E900E7ADFC /* CoreLocation.framework */; };
 		669EE5471BBB74CB0096D760 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669EE5461BBB74CB0096D760 /* CoreMotion.framework */; };
+		66A596221C14F392007D6E61 /* CUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A596211C14F392007D6E61 /* CUser.m */; };
 		7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
 		7A4036E819DE3F33007B6E8F /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
@@ -161,8 +164,14 @@
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
+		664BDD131C13B0040015846D /* NewUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewUser.h; path = Source/NewUser.h; sourceTree = "<group>"; };
+		664BDD141C13B0040015846D /* NewUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewUser.m; path = Source/NewUser.m; sourceTree = "<group>"; };
+		666647EC1C14F4C100A3DD3B /* SlapPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlapPage.h; path = Source/SlapPage.h; sourceTree = "<group>"; };
+		666647ED1C14F4C100A3DD3B /* SlapPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SlapPage.m; path = Source/SlapPage.m; sourceTree = "<group>"; };
 		666E8C831BAF60E900E7ADFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		669EE5461BBB74CB0096D760 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		66A596201C14F392007D6E61 /* CUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CUser.h; path = Source/CUser.h; sourceTree = "<group>"; };
+		66A596211C14F392007D6E61 /* CUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CUser.m; path = Source/CUser.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* SlappIOS Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SlappIOS Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -445,6 +454,12 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
+				664BDD131C13B0040015846D /* NewUser.h */,
+				664BDD141C13B0040015846D /* NewUser.m */,
+				66A596201C14F392007D6E61 /* CUser.h */,
+				66A596211C14F392007D6E61 /* CUser.m */,
+				666647EC1C14F4C100A3DD3B /* SlapPage.h */,
+				666647ED1C14F4C100A3DD3B /* SlapPage.m */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -826,6 +841,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
+				664BDD151C13B0040015846D /* NewUser.m in Sources */,
+				666647EE1C14F4C100A3DD3B /* SlapPage.m in Sources */,
+				66A596221C14F392007D6E61 /* CUser.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);

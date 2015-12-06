@@ -1,7 +1,14 @@
 #import "MainScene.h"
+#import "NewUser.h"
 #import <CoreMotion/CoreMotion.h>
 @implementation MainScene
 {
+    CCTextField *newFullName;
+    CCTextField *enteredUsername;
+    CCTextField *enteredPassword;
+    NSString *profileName;
+    CCTextField * newUsername;
+    CCTextField * newPassword;
      CMMotionManager *_motionManager;
 CCButton *locator;
 CLLocationManager * _locationManager;
@@ -169,53 +176,59 @@ CCLabelTTF *lat;
 
 -(void)sendLocation
 {
-//    NSString *theLocation = [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
-//    NSLog(theLocation);
-//    longitude.string = [NSString stringWithFormat:@"Longitude: %.8f", self.locationManager.location.coordinate.longitude];
-//    lat.string = [NSString stringWithFormat:@"Latitude: %.8f", self.locationManager.location.coordinate.latitude];
-//    slapped=true;
-//<<<<<<< HEAD
-//=======
-//<<<<<<< HEAD
-//    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
-//    CMAcceleration acceleration = accelerometerData.acceleration;
-//   initialAccel=acceleration.z;
-//=======
-//>>>>>>> ecc8965f81b88e6fc203dc3c06d71dca829209c8
-//    
-//>>>>>>> 40c96e0d5bb21838e4650b014b8a643b3a5ee41f
-//    NSLog(@"working");
-    
-//    
-//    //brian and zohair's code gl adam\
-//    //http://api.slapp.xyz/api/new?user_id=testuser02&latitude=1.7&longitude=1.1&radius=50&time=65127891
-//
-  //  NSString *urlString  = @"http://api.slapp.xyz/api/new?user_id=testuserios&latitude=" + lat + "&longitude=1.1&radius=50&time=65127891";
   NSString *url = [NSString stringWithFormat:@"https://api.slapp.xyz/api/new?user_id=briansbutthole&latitude=%@&longitude=%@&radius=20&time=%@",lat.string,longitude.string,localDateString];
     NSLog(url);
     NSURL *newURL = [NSURL URLWithString:url];
    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:newURL];
   [request setHTTPMethod:@"GET"];
- //  [request setHTTPBody:lat];
-   //[request setHTTPBody:longitude];
-    //
-    NSURLResponse *response;
+     NSURLResponse *response;
     NSError *err;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     NSString *strData = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding ];
     NSLog(@"%@",strData);
     NSLog(@"done");
-//    NSLog(@"responseData: %@", responseData);
-//    
-
     
 }
 
-float kUpdateFrequency= 100.0;
-float kFilteringFactor=0.1;
-float accelZ;
-int spikeZCount = 0;
+
+-(void)startSlappin
+{
+    SlapPage *newUse = (SlapPage *)[CCBReader loadAsScene:@"SlapPage"];
+    [[CCDirector sharedDirector] replaceScene:newUse];
+    
+}
+-(void)signUp
+{
+    CUser *cu = (CUser *)[CCBReader loadAsScene:@"CUser"];
+    [self addChild:cu];
+    [[CCDirector sharedDirector] replaceScene:cu];
+
+}
+///////////////////SIGNUP/////////////////
+
+-(void)create
+{
+    NSLog(newUsername.string);
+    if(![newUsername isEqual:@"NULL"]&&![newPassword isEqual:@"NULL"]&&![newFullName isEqual:@"NULL"])
+    {
+        profileName=newFullName.string;
+    }
+    
+}
 
 
+
+
+
+
+////////////////////LOGIN/////////////////
+-(void)logIn
+{
+    if(![ enteredUsername isEqual:@"NULL"] && ![ enteredPassword isEqual:@"NULL"])
+    {
+        profileName=newUsername.string;
+    }
+
+}
 @end
 
