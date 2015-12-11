@@ -2,7 +2,7 @@
 //  SlapPage.h
 //  SlappIOS
 //
-//  Created by Adam Zhang on 12/6/15.
+//  Created by Adam Zhang on 12/8/15.
 //  Copyright © 2015 Apportable. All rights reserved.
 //
 
